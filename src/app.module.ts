@@ -4,17 +4,19 @@ import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './user/entities/user.entity';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
     UserModule,
+    ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
       port: 5432,
       username: 'postgres',
-      password: '1234',
-      database: 'postgres',
+      password: process.env.DB_PASWWORD,
+      database: process.env.DB_NAME,
       entities: [User],
       synchronize: true,
       logging: true,
