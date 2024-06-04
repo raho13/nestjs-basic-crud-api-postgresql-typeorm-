@@ -5,6 +5,8 @@ import { UserModule } from './user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './user/entities/user.entity';
 import { ConfigModule } from '@nestjs/config';
+import { ProductModule } from './product/product.module';
+import { Product } from './product/entities/product.entity';
 
 @Module({
   imports: [
@@ -17,10 +19,11 @@ import { ConfigModule } from '@nestjs/config';
       username: 'postgres',
       password: process.env.DB_PASWWORD,
       database: process.env.DB_NAME,
-      entities: [User],
+      entities: [User,Product],
       synchronize: true,
       logging: true,
     }),
+    ProductModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -17,9 +17,7 @@ export class UserService {
   }
   create(createUserDto: CreateUserDto) {
     const newUser = this.userRepository.create(createUserDto);
-    newUser.id = uuidv4();
-    newUser.email = createUserDto.email;
-    newUser.name = createUserDto.name;
+
     this.userRepository.save(newUser);
     return { message: 'Saved', newUser };
   }
@@ -32,6 +30,7 @@ export class UserService {
     if (user) {
       user.name = updateUserDto.name;
       user.email = updateUserDto.email;
+
       return await this.userRepository.save(user);
     } else {
       throw new Error('user not found');
