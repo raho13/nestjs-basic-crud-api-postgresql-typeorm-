@@ -14,6 +14,8 @@ export class ProductService {
   ) {}
   create(createProductDto: CreateProductDto) {
     const newProduct = this.productRepository.create(createProductDto);
+
+    newProduct
     return this.productRepository.save(newProduct);
   }
 
